@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HittoStore - 야구용품 전문 쇼핑몰</title>
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+  <!-- 캐시 방지 메타 태그 추가 -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+</head>
+<body>
+  <!-- 최상단 검정 바 -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-menu-left">
+        <a href="orderDelivery/orderDelivery.html">주문/배송</a>
+        <a href="customerService/customerService.html">고객센터</a>
+      </div>
+      <div class="top-menu-right">
+        <a href="#" onclick="openLoginModal(); return false;">로그인</a>
+        <a href="signup/signup.html">회원가입</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 메인 메뉴 -->
+  <nav class="main-nav">
+    <div class="container">
+      <ul class="nav-menu">
+        <li><a href="#"><i class="fas fa-th-large"></i> 카테고리</a>
+          <ul class="sub-menu">
+            <li><a href="category/category.html?type=glove">글러브/미트</a></li>
+            <li><a href="category/category.html?type=bat">배트</a></li>
+            <li><a href="category/category.html?type=ball">야구공</a></li>
+            <li><a href="category/category.html?type=clothing">의류/잠바</a></li>
+            <li><a href="category/category.html?type=shoes">신발/스파이크</a></li>
+            <li><a href="category/category.html?type=equipment">장비용품</a></li>
+            <li><a href="category/category.html?type=training">트레이닝</a></li>
+          </ul>
+        </li>
+        <li><a href="bestproduct/bestproduct.html">베스트상품</a></li>
+        <li><a href="newproduct/newproduct.html">신상품</a></li>
+        <li><a href="#">이벤트</a></li>
+        <li><a href="#">브랜드샵</a></li>
+        <li><a href="#">할인상품</a></li>
+        <li><a href="#">시즌오프</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 헤더 (로고 및 검색) -->
+  <header class="main-header">
+    <div class="container">
+      <div class="logo">
+        <a href="index.html">
+          <h1><i class="fas fa-baseball-ball"></i> HittoStore</h1>
+        </a>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="검색어를 입력하세요">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </div>
+      <div class="header-icons">
+        <a href="#" class="icon-link" title="위시리스트"><i class="fas fa-heart"></i></a>
+        <a href="./community/index.html" class="icon-link" title="커뮤니티"><i class="fas fa-users"></i></a>
+        <a href="mypage/mypage.html" class="icon-link" title="내 계정"><i class="fas fa-user"></i></a>
+        <a href="#" class="icon-link cart" title="장바구니"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 메인 배너 (슬라이드) -->
+  <section class="main-banner no-padding">
+    <div class="banner-slider">
+      <!-- 배너 1: Wilson A1500 -->
+      <div class="banner-slide" style="background: linear-gradient(to right, #2c3e50, #4ca1af);">
+        <div class="banner-content">
+          <div class="banner-text">
+            <h2 class="brand-name">Wilson</h2>
+            <h3 class="product-name">A1500 시리즈</h3>
+            <p class="product-desc">프로선수들이 인정한 최고의 글러브<br>혁신적인 가죽 처리로 부드러운 착용감</p>
+            <a href="#" class="banner-btn">구매하기 <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="banner-image">
+            <img src="images/wilson.png" alt="Wilson A1500 글러브">
+          </div>
+        </div>
+      </div>  
+
+      <!-- 배너 2: Rawlings PRO-SERIES -->
+      <div class="banner-slide" style="background: linear-gradient(to right, #8e0e00, #1f1c18);">
+        <div class="banner-content">
+          <div class="banner-text">
+            <h2 class="brand-name">Rawlings</h2>
+            <h3 class="product-name">PRO-SERIES</h3>
+            <p class="product-desc">MLB 공식 공급 업체의 프리미엄 글러브<br>최상의 내구성과 정확한 포구감</p>
+            <a href="#" class="banner-btn">자세히 보기 <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="banner-image">
+            <img src="images/Rawlings.png" alt="Rawlings PRO-SERIES 글러브">
+          </div>
+        </div>
+      </div>
+
+      <!-- 배너 3: Mizuno SPEED FLEX -->
+      <div class="banner-slide" style="background: linear-gradient(to right, #000046, #1cb5e0);">
+        <div class="banner-content">
+          <div class="banner-text">
+            <h2 class="brand-name">Mizuno</h2>
+            <h3 class="product-name">SPEED FLEX</h3>
+            <p class="product-desc">유연성과 내구성의 완벽한 조화<br>미즈노만의 특허 기술로 최상의 성능 보장</p>
+            <a href="#" class="banner-btn">SHOP NOW <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="banner-image">
+            <img src="images/mizuno.png" alt="Mizuno SPEED FLEX 장비">
+          </div>
+        </div>
+      </div>
+
+      <!-- 배너 4: Louisville Slugger META -->
+      <div class="banner-slide" style="background: linear-gradient(to right, #434343, #000000);">
+        <div class="banner-content">
+          <div class="banner-text">
+            <h2 class="brand-name">Louisville Slugger</h2>
+            <h3 class="product-name">META 시리즈</h3>
+            <p class="product-desc">무제한 비거리의 새로운 기준<br>혁신적인 3피스 디자인으로 더 멀리 더 빠르게</p>
+            <a href="#" class="banner-btn">구매하기 <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="banner-image">
+            <img src="images/bat.png" alt="Louisville Slugger META 배트">
+          </div>
+        </div>
+      </div>
+
+      <!-- 배너 네비게이션 -->
+      <div class="banner-nav">
+        <button class="slider-prev" aria-label="이전 슬라이드"><i class="fas fa-chevron-left"></i></button>
+        <div class="slider-dots">
+          <span class="dot active" data-slide="0"></span>
+          <span class="dot" data-slide="1"></span>
+          <span class="dot" data-slide="2"></span>
+          <span class="dot" data-slide="3"></span>
+        </div>
+        <button class="slider-next" aria-label="다음 슬라이드"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 바로가기 아이콘 -->
+  <section class="quick-links">
+    <div class="container">
+      <div class="quick-links-wrapper" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px;">
+        <div class="quick-link-item">
+          <a href="category/category.html?type=glove">
+            <div class="icon-container">
+              <i class="fas fa-baseball"></i>
+            </div>
+            <span>글러브/미트</span>
+          </a>
+        </div>
+        <div class="quick-link-item">
+          <a href="category/category.html?type=bat">
+            <div class="icon-container">
+              <img src="images/baseball-bat.svg" alt="야구 배트 아이콘">
+            </div>
+            <span>배트</span>
+          </a>
+        </div>
+        <div class="quick-link-item">
+          <a href="category/category.html?type=ball">
+            <div class="icon-container">
+              <i class="fas fa-baseball-ball"></i>
+            </div>
+            <span>야구공</span>
+          </a>
+        </div>
+        <div class="quick-link-item">
+          <a href="category/category.html?type=clothing">
+            <div class="icon-container">
+              <i class="fas fa-tshirt"></i>
+            </div>
+            <span>의류/잠바</span>
+          </a>
+        </div>
+        <div class="quick-link-item">
+          <a href="category/category.html?type=shoes">
+            <div class="icon-container">
+              <i class="fas fa-running"></i>
+            </div>
+            <span>신발/스파이크</span>
+          </a>
+        </div>
+        <div class="quick-link-item">
+          <a href="category/category.html?type=equipment">
+            <div class="icon-container">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <span>장비용품</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 카테고리별 베스트 섹션 -->
+  <section class="category-best-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">카테고리별 베스트</h2>
+        <p class="section-desc">각 카테고리별 인기 상품을 만나보세요</p>
+      </div>
+      
+      <!-- 카테고리 탭 -->
+      <div class="category-tabs">
+        <div class="tabs-container">
+          <ul id="category-menu">
+            <li class="tab-btn active" data-category="glove">글러브/미트</li>
+            <li class="tab-btn" data-category="bat">배트</li>
+            <li class="tab-btn" data-category="ball">야구공</li>
+            <li class="tab-btn" data-category="clothing">의류/잠바</li>
+            <li class="tab-btn" data-category="shoes">신발/스파이크</li>
+            <li class="tab-btn" data-category="equipment">장비용품</li>
+          </ul>
+        </div>
+        <div class="tabs-nav">
+          <button class="tab-prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="tab-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+      
+      <!-- 카테고리별 상품 -->
+      <div class="category-products">
+        <div id="product-list" class="five-products-only">
+          <!-- 상품들이 여기에 자바스크립트로 동적으로 로드됩니다 -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 신상품 섹션 -->
+  <section class="new-products-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">신상품</h2>
+        <p class="section-desc">HittoStore의 새로운 상품을 가장 먼저 만나보세요</p>
+        <a href="newproduct/newproduct.html" class="view-more">더보기 <i class="fas fa-chevron-right"></i></a>
+      </div>
+      
+      <div class="products-grid" id="new-product-list">
+        <!-- 상품들은 JavaScript로 동적 생성됩니다 -->
+      </div>
+    </div>
+  </section>
+  
+  <!-- 베스트상품 섹션 -->
+  <section class="best-products-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">베스트상품</h2>
+        <p class="section-desc">고객님들이 가장 많이 선택한 인기 상품들을 소개합니다</p>
+        <a href="bestproduct/bestproduct.html" class="view-more">더보기 <i class="fas fa-chevron-right"></i></a>
+      </div>
+      
+      <div class="products-grid" id="best-products-container">
+        <!-- 베스트상품이 자바스크립트에 의해 동적으로 로드됩니다 -->
+      </div>
+    </div>
+  </section>
+  
+  <!-- 이벤트 프로모션 섹션 -->
+  <section class="event-promotions-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">이벤트 & 프로모션</h2>
+        <p class="section-desc">지금 진행 중인 특별한 혜택을 놓치지 마세요</p>
+      </div>
+      <div class="promotions-wrapper">
+        <!-- 왼쪽 이벤트 -->
+        <div class="promotion-card left-promotion">
+          <div class="promotion-content">
+            <span class="event-tag">스타디움 런칭 이벤트</span>
+            <h3 class="promotion-title">지금은 야구의 계절!</h3>
+            <h4 class="promotion-subtitle">최대 50% 할인 혜택</h4>
+            <p class="promotion-desc">HittoStore에서 인기 야구용품 최대 50% 할인 혜택을 놓치지 마세요.</p>
+          </div>
+          <div class="promotion-image">
+            <img src="images/promotions/gkfdls.png" alt="야구 용품 할인 이벤트">
+          </div>
+        </div>
+        
+        <!-- 오른쪽 이벤트 -->
+        <div class="promotion-card right-promotion">
+          <div class="promotion-content">
+            <span class="event-tag">야공사 오프라인매장 안내</span>
+            <h3 class="promotion-title">회원에게만 제공되는 특별 혜택</h3>
+            <h4 class="promotion-subtitle">전 상품 20% 할인</h4>
+            <p class="promotion-desc">모든 야구용품 20% 할인 혜택을 지금 만나보세요.</p>
+          </div>
+          <div class="promotion-image">
+            <img src="images/promotions/회원특가.png" alt="회원 특별 할인">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- 브랜드 로고 섹션 -->
+  <section class="brand-logos-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">브랜드샵</h2>
+        <p class="section-desc">다양한 브랜드의 제품을 만나보세요</p>
+      </div>
+      <div class="brand-logos-row">
+        <div class="brand-item">
+          <div class="brand-logo-container">
+            <img src="images/brand-logos/morimoto.png" alt="모리모토">
+          </div>
+          <p class="brand-name">모리모토</p>
+        </div>
+        
+        <div class="brand-item">
+          <div class="brand-logo-container">
+            <img src="images/brand-logos/prospecs.png" alt="프로스펙스">
+          </div>
+          <p class="brand-name">프로스펙스</p>
+        </div>
+        
+        <div class="brand-item">
+          <div class="brand-logo-container">
+            <img src="images/brand-logos/wilson1.png" alt="윌슨">
+          </div>
+          <p class="brand-name">윌슨</p>
+        </div>
+        
+        <div class="brand-item">
+          <div class="brand-logo-container">
+            <img src="images/brand-logos/nike.png" alt="나이키">
+          </div>
+          <p class="brand-name">나이키</p>
+        </div>
+        
+        <div class="brand-item">
+          <div class="brand-logo-container">
+            <img src="images/brand-logos/evoshield.png" alt="이보쉴드">
+          </div>
+          <p class="brand-name">이보쉴드</p>
+        </div>
+        
+        <div class="brand-item">
+          <div class="brand-logo-container">
+            <img src="images/brand-logos/100percent.png" alt="롤링스">
+          </div>
+          <p class="brand-name">롤링스</p>
+        </div>
+        
+        <div class="brand-item">
+          <div class="brand-logo-container">
+            <img src="images/brand-logos/oneeighty.png" alt="윈에이티">
+          </div>
+          <p class="brand-name">윈에이티</p>
+        </div>
+      </div>
+      <div class="brand-view-all-btn">
+        <button type="button">브랜드 전체보기</button>
+      </div>
+    </div>
+  </section>
+  
+  <!-- MLB 공식보호대 지품 섹션 -->
+  <section class="mlb-products-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">MLB 공식보호대 지품</h2>
+        <p class="section-desc">프로 선수들이 사용하는 공식 인증 보호장비를 만나보세요</p>
+      </div>
+      
+      <!-- 유튜브 비디오 레이아웃 -->
+      <div class="mlb-videos-wrapper">
+        <!-- 왼쪽 비디오 -->
+        <div class="mlb-video-container">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ZxISJ10tv2c" title="Putting G-Form's SmartFlex Technology to the Test" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        
+        <!-- 오른쪽 비디오 -->
+        <div class="mlb-video-container">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ZxISJ10tv2c" title="Glen Giovanucci Joins The Show" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      
+      <!-- 버튼 영역 -->
+      <div class="mlb-buttons">
+        <a href="#" class="mlb-btn product-btn">지품 구매하기</a>
+        <a href="https://g-form.com/collections/baseball" class="mlb-btn homepage-btn">지품 홈페이지 바로가기</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- 이용후기 섹션 -->
+  <section class="reviews-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">이용후기</h2>
+        <p class="section-desc">실제 구매한 고객님들의 생생한 후기를 확인하세요</p>
+        <a href="#" class="view-more">더보기 <i class="fas fa-chevron-right"></i></a>
+      </div>
+      
+      <div class="reviews-wrapper">
+        <!-- 리뷰 1 -->
+        <div class="review-card">
+          <div class="review-image">
+            <img src="images/products/sock.jpg" alt="야구 양말">
+          </div>
+          <div class="review-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <h3 class="review-title">약간 목있는 부분이 좀진한 홈슨이랑 똑같습니다</h3>
+          <p class="review-text">약간 목있는 부분이 좀진한 홈슨이랑 똑같습니다</p>
+          <div class="reviewer">
+            <span class="reviewer-icon"><i class="fas fa-user-circle"></i></span>
+            <span class="reviewer-name">아구종아</span>
+          </div>
+        </div>
+        
+        <!-- 리뷰 2 -->
+        <div class="review-card">
+          <div class="review-image">
+            <img src="images/products/rmffjqm.png" alt="글리터 패치">
+          </div>
+          <div class="review-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <h3 class="review-title">글리터 잘 돼요 <i class="fas fa-info-circle"></i></h3>
+          <p class="review-text">가격짜도 좋고 가격도 싸써서 잘 샀네요 만족합니다</p>
+          <div class="reviewer">
+            <span class="reviewer-icon"><i class="fas fa-user-circle"></i></span>
+            <span class="reviewer-name">심진아웃</span>
+          </div>
+        </div>
+        
+        <!-- 리뷰 3 -->
+        <div class="review-card">
+          <div class="review-image">
+            <img src="images/products/shoes.jpg" alt="야구화">
+          </div>
+          <div class="review-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <h3 class="review-title">디자인도 이쁘고 인조잔디에서 게임을 자주하는데 직합한 신발이라 구매했습니다</h3>
+          <p class="review-text">디자인도 이쁘고 인조잔디에서 게임을 자주하는데 직합한 신발이라 구매했음</p>
+          <div class="reviewer">
+            <span class="reviewer-icon"><i class="fas fa-user-circle"></i></span>
+            <span class="reviewer-name">두수람</span>
+          </div>
+        </div>
+        
+        <!-- 리뷰 4 -->
+        <div class="review-card">
+          <div class="review-image">
+            <img src="images/products/glove.jpg" alt="배팅장갑">
+          </div>
+          <div class="review-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <h3 class="review-title">생각에 쓰기 좋은 배팅장갑 같아요</h3>
+          <p class="review-text">생각에 쓰기 좋은 배팅장갑 같아요</p>
+          <div class="reviewer">
+            <span class="reviewer-icon"><i class="fas fa-user-circle"></i></span>
+            <span class="reviewer-name">티격팅</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 푸터 -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-info-boxes">
+        <div class="info-box">
+          <div class="info-title">
+            <i class="fas fa-headset"></i>
+            <h4>고객센터</h4>
+          </div>
+          <p class="info-main">010-6410-0391</p>
+          <p class="info-sub">Fax. xxx-xxx-xxxx</p>
+          <button class="info-button">1:1문의 <i class="fas fa-chevron-right"></i></button>
+          <p class="info-time">월-금 오후 PM 01:00 - PM 05:00 / 주말 및 공휴일 휴무</p>
+        </div>
+        
+        <div class="info-box">
+          <div class="info-title">
+            <i class="fas fa-wallet"></i>
+            <h4>계좌안내</h4>
+          </div>
+          <p class="info-main">카카오뱅크 3333184917999</p>
+          <p class="info-sub">예금주: 권법진</p>
+          <p class="info-notice">많이많이 입금해주세요</p>
+        </div>
+      </div>
+      
+      <!-- 정보 박스 토글 버튼 -->
+      <div class="info-box-toggle">
+        <button id="footer-info-toggle">
+          <i class="fas fa-chevron-up"></i>
+        </button>
+      </div>
+      
+      <div class="footer-top">
+        <div class="footer-logo">
+          <h2><i class="fas fa-baseball-ball"></i> HittoStore</h2>
+        </div>
+        <div class="footer-links">
+          <ul>
+            <li><a href="#">회사소개</a></li>
+            <li><a href="#">이용약관</a></li>
+            <li><a href="#"><strong>개인정보처리방침</strong></a></li>
+            <li><a href="#">제휴문의</a></li>
+            <li><a href="#">고객센터</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-main">
+        <div class="company-info">
+          <p>상호명: (주)히토스토어 | 대표: 권법진 | 사업자등록번호: 123-45-67890</p>
+          <p>주소: 부산광역시 부산진구 양지로 54 | 통신판매업신고: 제2025-부산양산-1234호</p>
+          <p>고객센터: 010-6410-0391 (평일 10:00~18:00, 점심시간 12:00~13:00, 주말/공휴일 휴무)</p>
+          <p class="email">이메일: gwonbubjin@gmail.com</p>
+        </div>
+        <div class="customer-center">
+          <h3>고객센터</h3>
+          <p class="phone">02-123-4567</p>
+          <p class="time">평일 10:00~18:00</p>
+          <p class="time">점심시간 12:00~13:00</p>
+          <p class="time">주말/공휴일 휴무</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 HittoStore All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 모달 컨테이너 -->
+  <div id="modal-container"></div>
+
+  <!-- 사이드 토글 메뉴 -->
+  <div class="sidebar-wrapper">
+    <div class="sidebar-content">
+      <div class="icon-list">
+        <div class="icon-item">
+          <a href="#" title="장바구니">
+            <i class="fas fa-shopping-cart"></i>장바구니
+          </a>
+        </div>
+        <div class="icon-item">
+          <a href="#" title="최근 본 상품">
+            <i class="fas fa-history"></i>최근 본 상품
+          </a>
+        </div>
+        <div class="icon-item">
+          <a href="#" id="scroll-up" title="위로 스크롤">
+            <i class="fas fa-chevron-up"></i>맨 위로
+          </a>
+        </div>
+        <div class="icon-item">
+          <a href="#" id="scroll-down" title="아래로 스크롤">
+            <i class="fas fa-chevron-down"></i>맨 아래로
+          </a>
+        </div>
+      </div>
+      <div class="full-info">
+        <div class="store-info">
+          <div class="store-image">
+            <img src="images/logo.png" alt="HittoStore">
+          </div>
+          <h3>⚾HittoStore⚾</h3>
+          <div class="info-nav">
+            <a href="#" class="info-btn">주문/배송</a>
+            <a href="#" class="info-btn">카카오톡 상담</a>
+            <a href="#" class="info-btn">1:1문의</a>
+            <a href="#" class="info-btn">로그인</a>
+            <a href="signup/signup.html" class="info-btn">회원가입</a>
+          </div>
+        </div>
+        <div class="customer-support">
+          <h4>고객센터</h4>
+          <p class="phone-number">010-6410-0391</p>
+          <p class="working-hours">월 - 금 오후 01:00 - 05:00</p>
+          <p class="working-hours">주말 및 공휴일 절대휴무~!</p>
+        </div>
+        <div class="account-info">
+          <h4>계좌안내</h4>
+          <p>카카오뱅크</p>
+          <p class="account-number">3333184917999</p>
+          <p class="account-holder">예금주: 권법진</p>
+        </div>
+        <div class="social-links">
+          <a href="#"><i class="fas fa-comment"></i></a>
+          <a href="#"><i class="fas fa-blog"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 사이드바 토글 버튼 -->
+  <div class="sidebar-toggle">
+    <button id="sidebar-toggle-btn" aria-label="사이드 메뉴 열기/닫기">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+  </div>
+
+  <script src="js/main.js"></script>
+
+  <script>
+    // 로그인 모달 불러오기 및 제어 스크립트
+    function openLoginModal() {
+      const modalContainer = document.getElementById('modal-container');
+      
+      // components/login-modal.html 불러오기
+      fetch('components/login-modal.html')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('모달을 불러오는데 실패했습니다.');
+          }
+          return response.text();
+        })
+        .then(html => {
+          // 모달 HTML 삽입
+          modalContainer.innerHTML = html;
+          
+          // 모달 표시
+          const loginModalOverlay = document.querySelector('.login-modal-overlay');
+          if (loginModalOverlay) {
+            loginModalOverlay.classList.add('show');
+            
+            // 모달 내의 스크립트가 실행될 수 있도록 동적으로 추가된 스크립트 실행
+            const scripts = modalContainer.querySelectorAll('script');
+            scripts.forEach(script => {
+              const newScript = document.createElement('script');
+              Array.from(script.attributes).forEach(attr => 
+                newScript.setAttribute(attr.name, attr.value)
+              );
+              newScript.textContent = script.textContent;
+              script.parentNode.replaceChild(newScript, script);
+            });
+            
+            // 닫기 버튼 이벤트 연결
+            const closeModalBtn = document.getElementById('close-modal');
+            if (closeModalBtn) {
+              closeModalBtn.addEventListener('click', closeLoginModal);
+            }
+            
+            // 모달 바깥 영역 클릭 시 닫기
+            loginModalOverlay.addEventListener('click', function(e) {
+              if (e.target === loginModalOverlay) {
+                closeLoginModal();
+              }
+            });
+            
+            // ESC 키 누를 때 모달 닫기
+            document.addEventListener('keydown', function(e) {
+              if (e.key === 'Escape' && loginModalOverlay.classList.contains('show')) {
+                closeLoginModal();
+              }
+            });
+          }
+        })
+        .catch(error => {
+          console.error('모달 로딩 오류:', error);
+          alert('로그인 모달을 불러오는데 실패했습니다.');
+        });
+    }
+    
+    // 로그인 상태 업데이트 함수
+    function updateLoginStatus() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      const userId = localStorage.getItem('userId');
+      const loginLink = document.querySelector('.top-menu-right a:first-child');
+      
+      if (isLoggedIn && loginLink) {
+        loginLink.textContent = '로그아웃';
+        loginLink.setAttribute('onclick', 'logout(); return false;');
+        
+        // 로그인 사용자 이름 표시 (옵션)
+        if (userId) {
+          const userLinks = document.querySelectorAll('.top-menu-right a');
+          if (userLinks.length > 1) {
+            userLinks[1].textContent = userId + '님';
+          }
+        }
+      } else if (loginLink) {
+        loginLink.textContent = '로그인';
+        loginLink.setAttribute('onclick', 'openLoginModal(); return false;');
+      }
+    }
+    
+    // 로그아웃 함수
+    function logout() {
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('userId');
+      alert('로그아웃 되었습니다.');
+      updateLoginStatus();
+      // 현재 커뮤니티 페이지에 있다면 메인 페이지로 이동
+      if (window.location.href.includes('/community/')) {
+        window.location.href = '../index.html';
+      } else {
+        // 현재 페이지 새로고침
+        location.reload();
+      }
+    }
+    
+    // 페이지 로드 시 로그인 상태 확인
+    document.addEventListener('DOMContentLoaded', function() {
+      updateLoginStatus();
+    });
+    
+    // 전역 함수로 선언하여 모달 내 스크립트에서도 접근 가능하도록 함
+    window.closeLoginModal = function() {
+      const loginModalOverlay = document.querySelector('.login-modal-overlay');
+      if (loginModalOverlay) {
+        loginModalOverlay.classList.remove('show');
+        
+        // 애니메이션 완료 후 모달 HTML 제거 (선택 사항)
+        setTimeout(() => {
+          const modalContainer = document.getElementById('modal-container');
+          modalContainer.innerHTML = '';
+        }, 300);
+      }
+    }
+    
+    // 전역 함수로 선언하여 모달에서 호출할 수 있도록 함
+    window.updateLoginStatus = updateLoginStatus;
+
+    // DOM이 로드된 후 실행
+    document.addEventListener('DOMContentLoaded', function() {
+      // 배너 슬라이더 초기화
+      initBannerSlider();
+      
+      // 카테고리 탭 초기화
+      initCategoryTabs();
+      
+      // 카테고리별 상품 초기화
+      initCategoryProducts();
+      
+      // 사이드바 토글 초기화
+      initSidebarToggle();
+      
+      // 스크롤 버튼 초기화
+      initScrollButtons();
+      
+      // 푸터 정보 토글 초기화
+      initFooterInfoToggle();
+      
+      // 베스트상품 렌더링
+      renderBestProducts();
+      
+      console.log('모든 초기화 함수 실행 완료');
+    });
+  </script>
+</body>
+</html> 

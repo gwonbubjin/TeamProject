@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>커뮤니티 - HittoStore</title>
+  <link rel="icon" href="../images/logo.png" type="image/png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+</head>
+<body>
+  <!-- 최상단 검정 바 -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-menu-left">
+        <a href="../orderDelivery/orderDelivery.html">주문/배송</a>
+        <a href="../customerService/customerService.html">고객센터</a>
+      </div>
+      <div class="top-menu-right">
+        <a href="#" onclick="openLoginModal(); return false;">로그인</a>
+        <a href="#">회원가입</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 헤더 (로고 및 검색) -->
+  <header class="main-header">
+    <div class="container">
+      <div class="logo">
+        <a href="../index.html">
+          <h1><i class="fas fa-baseball-ball"></i> HittoStore</h1>
+        </a>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="검색어를 입력하세요">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </div>
+      <div class="header-icons">
+        <a href="#" class="icon-link" title="위시리스트"><i class="fas fa-heart"></i></a>
+        <a href="./index.html" class="icon-link active" title="커뮤니티"><i class="fas fa-users"></i></a>
+        <a href="../mypage/mypage.html" class="icon-link" title="내 계정"><i class="fas fa-user"></i></a>
+        <a href="#" class="icon-link cart" title="장바구니"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 메인 메뉴 -->
+  <nav class="main-nav">
+    <div class="container">
+      <ul class="nav-menu">
+        <li><a href="../index.html">쇼핑몰 홈</a></li>
+        <li><a href="#" class="active">커뮤니티</a></li>
+        <li><a href="#">공지사항</a></li>
+        <li><a href="#">자유게시판</a></li>
+        <li><a href="#">구매후기</a></li>
+        <li><a href="#">야구팁</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 메인 컨텐츠 -->
+  <div class="main-content">
+    <div class="container">
+      <!-- 게시판 타이틀 및 설명 -->
+      <div class="board-header">
+        <h2>HittoStore 커뮤니티</h2>
+        <p>야구를 사랑하는 사람들의 이야기 공간입니다. 자유롭게 소통하세요!</p>
+      </div>
+      
+      <!-- 게시판 카테고리 버튼 -->
+      <div class="board-category">
+        <a href="#" class="category-btn active">전체글</a>
+        <a href="#" class="category-btn">공지사항</a>
+        <a href="#" class="category-btn">자유게시판</a>
+        <a href="#" class="category-btn">구매후기</a>
+        <a href="#" class="category-btn">야구팁</a>
+        <a href="#" class="category-btn">FAQ</a>
+      </div>
+      
+      <!-- 게시판 리스트 -->
+      <div class="board-list">
+        <div class="board-tools">
+          <div class="search-form">
+            <select name="search-type">
+              <option value="title">제목</option>
+              <option value="content">내용</option>
+              <option value="author">작성자</option>
+            </select>
+            <input type="text" placeholder="검색어를 입력하세요">
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </div>
+          <a href="#" class="write-btn">글쓰기</a>
+        </div>
+        
+        <table class="board-table">
+          <thead>
+            <tr>
+              <th class="num">번호</th>
+              <th class="category">분류</th>
+              <th class="title">제목</th>
+              <th class="author">작성자</th>
+              <th class="date">작성일</th>
+              <th class="views">조회</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 공지사항 -->
+            <tr class="notice">
+              <td class="num"><span class="notice-tag">공지</span></td>
+              <td class="category">공지</td>
+              <td class="title"><a href="#">커뮤니티 이용 규칙 안내</a></td>
+              <td class="author">관리자</td>
+              <td class="date">2025.04.15</td>
+              <td class="views">521</td>
+            </tr>
+            <tr class="notice">
+              <td class="num"><span class="notice-tag">공지</span></td>
+              <td class="category">이벤트</td>
+              <td class="title"><a href="#">5월 이벤트: 글러브 구매 시 볼증정 이벤트</a></td>
+              <td class="author">관리자</td>
+              <td class="date">2025.05.01</td>
+              <td class="views">487</td>
+            </tr>
+            
+            <!-- 일반 글 -->
+            <tr>
+              <td class="num">10</td>
+              <td class="category">자유</td>
+              <td class="title"><a href="#">연식배트와 알루미늄 배트 차이점이 뭘까요?</a> <span class="comment-count">[15]</span></td>
+              <td class="author">타격왕</td>
+              <td class="date">2025.05.08</td>
+              <td class="views">142</td>
+            </tr>
+            <tr>
+              <td class="num">9</td>
+              <td class="category">야구팁</td>
+              <td class="title"><a href="#">포수 미트 길들이기 꿀팁 공유</a> <span class="comment-count">[8]</span></td>
+              <td class="author">캐쳐맨</td>
+              <td class="date">2025.05.07</td>
+              <td class="views">203</td>
+            </tr>
+            <tr>
+              <td class="num">8</td>
+              <td class="category">구매후기</td>
+              <td class="title"><a href="#">[후기] 드디어 내 인생 글러브를 만났습니다!</a> <span class="new-tag">NEW</span></td>
+              <td class="author">내야수진</td>
+              <td class="date">2025.05.07</td>
+              <td class="views">89</td>
+            </tr>
+            <tr>
+              <td class="num">7</td>
+              <td class="category">자유</td>
+              <td class="title"><a href="#">요즘 날씨 좋아서 야구하기 딱이네요ㅎㅎ</a></td>
+              <td class="author">야구좋아</td>
+              <td class="date">2025.05.06</td>
+              <td class="views">76</td>
+            </tr>
+            <tr>
+              <td class="num">6</td>
+              <td class="category">야구팁</td>
+              <td class="title"><a href="#">투수들을 위한 어깨 관리법 3가지</a> <span class="comment-count">[12]</span></td>
+              <td class="author">에이스</td>
+              <td class="date">2025.05.05</td>
+              <td class="views">231</td>
+            </tr>
+            <tr>
+              <td class="num">5</td>
+              <td class="category">구매후기</td>
+              <td class="title"><a href="#">윌슨 A2000 사용 6개월 후기</a> <span class="comment-count">[4]</span></td>
+              <td class="author">야구대장</td>
+              <td class="date">2025.05.04</td>
+              <td class="views">188</td>
+            </tr>
+            <tr>
+              <td class="num">4</td>
+              <td class="category">자유</td>
+              <td class="title"><a href="#">야구 입문자 장비 추천 부탁드립니다.</a> <span class="comment-count">[20]</span></td>
+              <td class="author">초보자</td>
+              <td class="date">2025.05.03</td>
+              <td class="views">302</td>
+            </tr>
+            <tr>
+              <td class="num">3</td>
+              <td class="category">야구팁</td>
+              <td class="title"><a href="#">타격 폼 교정하는 방법 (영상 첨부)</a></td>
+              <td class="author">홈런왕</td>
+              <td class="date">2025.05.02</td>
+              <td class="views">254</td>
+            </tr>
+            <tr>
+              <td class="num">2</td>
+              <td class="category">자유</td>
+              <td class="title"><a href="#">다들 어떤 포지션 맡고 계세요?</a> <span class="comment-count">[32]</span></td>
+              <td class="author">올라운더</td>
+              <td class="date">2025.05.01</td>
+              <td class="views">347</td>
+            </tr>
+            <tr>
+              <td class="num">1</td>
+              <td class="category">구매후기</td>
+              <td class="title"><a href="#">신상 스파이크 구매 후기 (사진 있음)</a></td>
+              <td class="author">도루왕</td>
+              <td class="date">2025.04.30</td>
+              <td class="views">215</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <!-- 페이지네이션 -->
+        <div class="pagination">
+          <a href="#" class="page-btn prev"><i class="fas fa-chevron-left"></i></a>
+          <a href="#" class="page-num active">1</a>
+          <a href="#" class="page-num">2</a>
+          <a href="#" class="page-num">3</a>
+          <a href="#" class="page-num">4</a>
+          <a href="#" class="page-num">5</a>
+          <a href="#" class="page-btn next"><i class="fas fa-chevron-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 푸터 -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-logo">
+          <h2><i class="fas fa-baseball-ball"></i> HittoStore</h2>
+        </div>
+        <div class="footer-links">
+          <ul>
+            <li><a href="#">회사소개</a></li>
+            <li><a href="#">이용약관</a></li>
+            <li><a href="#"><strong>개인정보처리방침</strong></a></li>
+            <li><a href="#">제휴문의</a></li>
+            <li><a href="#">고객센터</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-main">
+        <div class="company-info">
+          <p>상호명: (주)히토스토어 | 대표: 권법진 | 사업자등록번호: 123-45-67890</p>
+          <p>주소: 부산광역시 부산진구 양지로 54 | 통신판매업신고: 제2025-부산양산-1234호</p>
+          <p>고객센터: 010-6410-0391 (평일 10:00~18:00, 점심시간 12:00~13:00, 주말/공휴일 휴무)</p>
+          <p class="email">이메일: gwonbubjin@gmail.com</p>
+        </div>
+        <div class="customer-center">
+          <h3>고객센터</h3>
+          <p class="phone">02-123-4567</p>
+          <p class="time">평일 10:00~18:00</p>
+          <p class="time">점심시간 12:00~13:00</p>
+          <p class="time">주말/공휴일 휴무</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 HittoStore All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- 모달 컨테이너 -->
+  <div id="modal-container"></div>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // 로그인 모달 불러오기 및 제어 스크립트
+    function openLoginModal() {
+      const modalContainer = document.getElementById('modal-container');
+      
+      // components/login-modal.html 불러오기
+      fetch('../components/login-modal.html')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('모달을 불러오는데 실패했습니다.');
+          }
+          return response.text();
+        })
+        .then(html => {
+          // 모달 HTML 삽입
+          modalContainer.innerHTML = html;
+          
+          // 모달 표시
+          const loginModalOverlay = document.querySelector('.login-modal-overlay');
+          if (loginModalOverlay) {
+            loginModalOverlay.classList.add('show');
+            
+            // 모달 내의 스크립트가 실행될 수 있도록 동적으로 추가된 스크립트 실행
+            const scripts = modalContainer.querySelectorAll('script');
+            scripts.forEach(script => {
+              const newScript = document.createElement('script');
+              Array.from(script.attributes).forEach(attr => 
+                newScript.setAttribute(attr.name, attr.value)
+              );
+              newScript.textContent = script.textContent;
+              script.parentNode.replaceChild(newScript, script);
+            });
+            
+            // 닫기 버튼 이벤트 연결
+            const closeModalBtn = document.getElementById('close-modal');
+            if (closeModalBtn) {
+              closeModalBtn.addEventListener('click', closeLoginModal);
+            }
+            
+            // 모달 바깥 영역 클릭 시 닫기
+            loginModalOverlay.addEventListener('click', function(e) {
+              if (e.target === loginModalOverlay) {
+                closeLoginModal();
+              }
+            });
+            
+            // ESC 키 누를 때 모달 닫기
+            document.addEventListener('keydown', function(e) {
+              if (e.key === 'Escape' && loginModalOverlay.classList.contains('show')) {
+                closeLoginModal();
+              }
+            });
+          }
+        })
+        .catch(error => {
+          console.error('모달 로딩 오류:', error);
+          alert('로그인 모달을 불러오는데 실패했습니다.');
+        });
+    }
+    
+    // 로그인 상태 업데이트 함수
+    function updateLoginStatus() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      const userId = localStorage.getItem('userId');
+      const loginLink = document.querySelector('.top-menu-right a:first-child');
+      
+      if (isLoggedIn && loginLink) {
+        loginLink.textContent = '로그아웃';
+        loginLink.setAttribute('onclick', 'logout(); return false;');
+        
+        // 로그인 사용자 이름 표시 (옵션)
+        if (userId) {
+          const userLinks = document.querySelectorAll('.top-menu-right a');
+          if (userLinks.length > 1) {
+            userLinks[1].textContent = userId + '님';
+          }
+        }
+      } else if (loginLink) {
+        loginLink.textContent = '로그인';
+        loginLink.setAttribute('onclick', 'openLoginModal(); return false;');
+      }
+    }
+    
+    // 로그아웃 함수
+    function logout() {
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('userId');
+      alert('로그아웃 되었습니다.');
+      updateLoginStatus();
+      // 현재 커뮤니티 페이지에 있다면 메인 페이지로 이동
+      if (window.location.href.includes('/community/')) {
+        window.location.href = '../index.html';
+      } else {
+        // 현재 페이지 새로고침
+        location.reload();
+      }
+    }
+    
+    // 페이지 로드 시 로그인 상태 확인
+    document.addEventListener('DOMContentLoaded', function() {
+      updateLoginStatus();
+    });
+    
+    // 전역 함수로 선언하여 모달 내 스크립트에서도 접근 가능하도록 함
+    window.closeLoginModal = function() {
+      const loginModalOverlay = document.querySelector('.login-modal-overlay');
+      if (loginModalOverlay) {
+        loginModalOverlay.classList.remove('show');
+        
+        // 애니메이션 완료 후 모달 HTML 제거 (선택 사항)
+        setTimeout(() => {
+          const modalContainer = document.getElementById('modal-container');
+          modalContainer.innerHTML = '';
+        }, 300);
+      }
+    }
+    
+    // 전역 함수로 선언하여 모달에서 호출할 수 있도록 함
+    window.updateLoginStatus = updateLoginStatus;
+  </script>
+</body>
+</html> 

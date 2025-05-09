@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주문/배송 조회 - HittoStore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 기본 스타일 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            position: relative;
+        }
+        
+        /* 상단 네비게이션 */
+        .top-bar {
+            background-color: #222;
+            color: #fff;
+            padding: 0.5rem 0;
+        }
+        
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 1rem;
+        }
+        
+        .top-menu-left, .top-menu-right {
+            display: flex;
+        }
+        
+        .top-menu-left a, .top-menu-right a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 1.5rem;
+            font-size: 0.85rem;
+        }
+        
+        .top-menu-right a {
+            margin-right: 0;
+            margin-left: 1.5rem;
+        }
+        
+        .top-menu-left a:hover, .top-menu-right a:hover {
+            color: #fa5252;
+        }
+        
+        /* 메인 헤더 */
+        .main-header {
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            padding: 1rem 0;
+        }
+        
+        .main-header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: #333;
+        }
+        
+        .logo h1 i {
+            color: #fa5252;
+            margin-right: 0.5rem;
+        }
+        
+        .logo a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        /* 뒤로가기 버튼 */
+        .back-button {
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            display: flex;
+            align-items: center;
+            color: #333;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .back-button i {
+            margin-right: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .back-button:hover {
+            color: #fa5252;
+        }
+        
+        /* 주문/배송 조회 헤더 */
+        .order-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .order-header h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .order-header p {
+            color: #777;
+            font-size: 0.95rem;
+        }
+        
+        /* 필터 영역 */
+        .order-filter {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .filter-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .filter-search {
+            display: flex;
+            align-items: center;
+        }
+        
+        .filter-search input {
+            padding: 0.5rem 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            width: 200px;
+        }
+        
+        .filter-search button {
+            background-color: #fa5252;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            margin-left: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+        
+        .filter-search button:hover {
+            background-color: #e03131;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+        }
+        
+        .filter-label {
+            margin-right: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .filter-select {
+            padding: 0.4rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            background-color: white;
+        }
+        
+        /* 주문 상태 탭 */
+        .order-status-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 1.5rem;
+        }
+        
+        .status-tab {
+            padding: 0.8rem 1.5rem;
+            font-size: 0.95rem;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .status-tab:hover {
+            color: #fa5252;
+        }
+        
+        .status-tab.active {
+            color: #fa5252;
+            border-bottom: 2px solid #fa5252;
+            font-weight: 500;
+        }
+        
+        .status-count {
+            display: inline-block;
+            background-color: #f1f3f5;
+            color: #999;
+            font-size: 0.75rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 10px;
+            margin-left: 0.3rem;
+        }
+        
+        /* 주문 내역 없음 메시지 */
+        .no-orders {
+            text-align: center;
+            padding: 4rem 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .no-orders-icon {
+            font-size: 3.5rem;
+            color: #fa5252;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .no-orders-message {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 0.7rem;
+            font-weight: 500;
+        }
+        
+        .no-orders-sub {
+            font-size: 0.95rem;
+            color: #888;
+            margin-bottom: 1.5rem;
+        }
+        
+        .shop-now-btn {
+            display: inline-block;
+            background-color: #fa5252;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        
+        .shop-now-btn:hover {
+            background-color: #e03131;
+        }
+        
+        /* 주문 목록 (향후 사용) */
+        .order-list {
+            display: none; /* 초기에는 숨김 처리 */
+        }
+        
+        .order-item {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .order-header-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .order-date {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .order-number {
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .order-status {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .status-payment {
+            color: #fa5252;
+        }
+        
+        .status-shipping {
+            color: #f76707;
+        }
+        
+        .status-delivered {
+            color: #12b886;
+        }
+        
+        .status-canceled {
+            color: #868e96;
+        }
+        
+        .order-details {
+            padding: 1.5rem;
+        }
+        
+        .order-product {
+            display: flex;
+            align-items: center;
+        }
+        
+        .product-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            background-color: #f8f8f8;
+            border-radius: 4px;
+        }
+        
+        .product-info {
+            margin-left: 1rem;
+            flex-grow: 1;
+        }
+        
+        .product-name {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 0.3rem;
+        }
+        
+        .product-option {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 0.3rem;
+        }
+        
+        .product-price {
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .order-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background-color: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+        
+        .order-total {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .order-total span {
+            color: #fa5252;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .action-btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: white;
+            transition: all 0.2s;
+        }
+        
+        .action-btn:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .action-btn.primary {
+            background-color: #fa5252;
+            color: white;
+            border-color: #fa5252;
+        }
+        
+        .action-btn.primary:hover {
+            background-color: #e03131;
+        }
+        
+        /* 반응형 스타일 */
+        @media (max-width: 992px) {
+            .filter-options {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .filter-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .filter-search {
+                width: 100%;
+                margin-top: 0.8rem;
+            }
+            
+            .filter-search input {
+                flex-grow: 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem 0.8rem;
+            }
+            
+            .order-header h2 {
+                font-size: 1.7rem;
+            }
+            
+            .order-status-tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 0.5rem;
+            }
+            
+            .status-tab {
+                padding: 0.7rem 1rem;
+            }
+            
+            .no-orders {
+                padding: 3rem 0.8rem;
+            }
+            
+            .no-orders-icon {
+                font-size: 3rem;
+            }
+            
+            .no-orders-message {
+                font-size: 1.1rem;
+            }
+            
+            .order-header-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .order-actions {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .action-buttons {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .product-image {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .order-details {
+                padding: 1rem;
+            }
+            
+            .status-tab {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.85rem;
+            }
+            
+            .shop-now-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 상단 메뉴 바 -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-menu-left">
+                <a href="./orderDelivery.html" class="active">주문/배송</a>
+                <a href="../customerService/customerService.html">고객센터</a>
+            </div>
+            <div class="top-menu-right">
+                <a href="#" onclick="openLoginModal(); return false;">로그인</a>
+                <a href="../signup/signup.html">회원가입</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 메인 헤더 (로고 및 검색) -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">
+                    <h1><i class="fas fa-baseball-ball"></i> HittoStore</h1>
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 뒤로가기 버튼 -->
+        <a href="../index.html" class="back-button">
+            <i class="fas fa-chevron-left"></i> 홈으로 돌아가기
+        </a>
+        
+        <!-- 페이지 헤더 -->
+        <div class="order-header">
+            <h2>주문/배송 조회</h2>
+            <p>고객님의 주문 및 배송 현황을 확인하실 수 있습니다</p>
+        </div>
+        
+        <!-- 필터 영역 -->
+        <div class="order-filter">
+            <div class="filter-header">
+                <div class="filter-title">주문 조회</div>
+                <div class="filter-search">
+                    <input type="text" placeholder="주문번호 또는 상품명 검색">
+                    <button type="button">검색</button>
+                </div>
+            </div>
+            <div class="filter-options">
+                <div class="filter-group">
+                    <div class="filter-label">조회기간</div>
+                    <select class="filter-select">
+                        <option>최근 1개월</option>
+                        <option>최근 3개월</option>
+                        <option>최근 6개월</option>
+                        <option>직접 설정</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <div class="filter-label">주문상태</div>
+                    <select class="filter-select">
+                        <option>전체</option>
+                        <option>결제완료</option>
+                        <option>배송준비중</option>
+                        <option>배송중</option>
+                        <option>배송완료</option>
+                        <option>취소/반품/교환</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 주문 상태 탭 -->
+        <div class="order-status-tabs">
+            <div class="status-tab active">전체 <span class="status-count">0</span></div>
+            <div class="status-tab">결제완료 <span class="status-count">0</span></div>
+            <div class="status-tab">배송준비중 <span class="status-count">0</span></div>
+            <div class="status-tab">배송중 <span class="status-count">0</span></div>
+            <div class="status-tab">배송완료 <span class="status-count">0</span></div>
+            <div class="status-tab">취소/반품/교환 <span class="status-count">0</span></div>
+        </div>
+        
+        <!-- 주문 내역 없음 메시지 -->
+        <div class="no-orders">
+            <div class="no-orders-icon"><i class="fas fa-shopping-bag"></i></div>
+            <p class="no-orders-message">주문하신 내역이 없습니다</p>
+            <p class="no-orders-sub">HittoStore에서 다양한 야구 용품을 만나보세요!</p>
+            <a href="../newproduct/newproduct.html" class="shop-now-btn">신상품 보러가기</a>
+        </div>
+        
+        <!-- 주문 목록 (향후 주문 데이터가 있을 경우 표시) -->
+        <div id="order-list" class="order-list">
+            <!-- 여기에 주문 데이터가 로드됩니다 -->
+            
+            <!-- 아래는 주문 항목 샘플 템플릿 (실제로는 표시되지 않음) -->
+            <!--
+            <div class="order-item">
+                <div class="order-header-info">
+                    <div class="order-date">2023.11.22</div>
+                    <div class="order-number">주문번호: 2023112210395</div>
+                    <div class="order-status status-shipping">배송중</div>
+                </div>
+                <div class="order-details">
+                    <div class="order-product">
+                        <img src="../images/product-sample.jpg" alt="상품 이미지" class="product-image">
+                        <div class="product-info">
+                            <div class="product-name">프로스펙스 야구화 선수용 스파이크</div>
+                            <div class="product-option">옵션: 블랙/265mm</div>
+                            <div class="product-price">89,000원 / 1개</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-actions">
+                    <div class="order-total">총 결제금액: <span>89,000원</span></div>
+                    <div class="action-buttons">
+                        <button class="action-btn">주문취소</button>
+                        <button class="action-btn">배송조회</button>
+                        <button class="action-btn primary">리뷰작성</button>
+                    </div>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+    
+    <!-- 모달 컨테이너 추가 -->
+    <div id="modal-container"></div>
+    
+    <script>
+        // 주문 상태 탭 클릭 이벤트
+        document.querySelectorAll('.status-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.status-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // 탭에 따른 주문 필터링(지금은 주문이 없으므로 동작하지 않음)
+                filterOrdersByStatus(this.textContent.trim().split(' ')[0]);
+            });
+        });
+        
+        // 주문 내역을 상태별로 필터링하는 함수
+        function filterOrdersByStatus(status) {
+            console.log('주문 필터링:', status);
+            // 실제 주문이 있을 경우 필터링 로직 구현
+        }
+        
+        // 주문 내역을 로드하는 함수 (향후 구현)
+        function loadOrders() {
+            // API 또는 백엔드에서 주문 데이터 로드
+            // 예: fetch('/api/orders')
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         if (data.length > 0) {
+            //             displayOrders(data);
+            //         } else {
+            //             showNoOrdersMessage();
+            //         }
+            //     });
+        }
+        
+        // 주문 데이터 표시 함수 (향후 구현)
+        function displayOrders(orders) {
+            // 주문 데이터가 있을 경우 화면에 표시
+            // const orderList = document.getElementById('order-list');
+            // orderList.style.display = 'block';
+            // document.querySelector('.no-orders').style.display = 'none';
+            
+            // orders.forEach(order => {
+            //     // 각 주문별 HTML 생성 및 추가
+            //     const orderItem = createOrderItemHTML(order);
+            //     orderList.appendChild(orderItem);
+            // });
+        }
+        
+        // 주문 항목 HTML 생성 함수 (향후 구현)
+        function createOrderItemHTML(order) {
+            // 주문 정보를 기반으로 HTML 요소 생성
+            // const orderItem = document.createElement('div');
+            // orderItem.className = 'order-item';
+            // ... 주문 정보 채우기
+            // return orderItem;
+        }
+        
+        // 주문 검색 기능
+        const searchBtn = document.querySelector('.filter-search button');
+        searchBtn.addEventListener('click', function() {
+            const searchTerm = document.querySelector('.filter-search input').value.trim();
+            if (searchTerm) {
+                console.log('주문 검색:', searchTerm);
+                // 실제 검색 로직 구현
+                // searchOrders(searchTerm);
+            }
+        });
+        
+        // 로그인 모달 불러오기 및 제어 스크립트
+        function openLoginModal() {
+            const modalContainer = document.getElementById('modal-container');
+            
+            // 상대 경로 수정 - 현재 orderDelivery 폴더에 있으므로 상위로 이동
+            fetch('../components/login-modal.html')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('모달을 불러오는데 실패했습니다.');
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    // 모달 HTML 삽입
+                    modalContainer.innerHTML = html;
+                    
+                    // CSS 경로 수정
+                    const cssLinks = modalContainer.querySelectorAll('link');
+                    cssLinks.forEach(link => {
+                        if (link.getAttribute('href') === 'components/login-modal.css') {
+                            link.setAttribute('href', '../components/login-modal.css');
+                        }
+                    });
+                    
+                    // JS 경로 수정
+                    const scripts = modalContainer.querySelectorAll('script');
+                    scripts.forEach(script => {
+                        if (script.getAttribute('src') === 'components/login-modal.js') {
+                            script.setAttribute('src', '../components/login-modal.js');
+                        }
+                    });
+                    
+                    // 모달 표시
+                    const loginModalOverlay = document.querySelector('.login-modal-overlay');
+                    if (loginModalOverlay) {
+                        loginModalOverlay.classList.add('show');
+                        
+                        // 모달 내의 스크립트가 실행될 수 있도록 동적으로 추가된 스크립트 실행
+                        const scripts = modalContainer.querySelectorAll('script');
+                        scripts.forEach(script => {
+                            const newScript = document.createElement('script');
+                            Array.from(script.attributes).forEach(attr => 
+                                newScript.setAttribute(attr.name, attr.value)
+                            );
+                            newScript.textContent = script.textContent;
+                            script.parentNode.replaceChild(newScript, script);
+                        });
+                        
+                        // 닫기 버튼 이벤트 연결
+                        const closeModalBtn = document.getElementById('close-modal');
+                        if (closeModalBtn) {
+                            closeModalBtn.addEventListener('click', closeLoginModal);
+                        }
+                        
+                        // 모달 바깥 영역 클릭 시 닫기
+                        loginModalOverlay.addEventListener('click', function(e) {
+                            if (e.target === loginModalOverlay) {
+                                closeLoginModal();
+                            }
+                        });
+                        
+                        // ESC 키 누를 때 모달 닫기
+                        document.addEventListener('keydown', function(e) {
+                            if (e.key === 'Escape' && loginModalOverlay.classList.contains('show')) {
+                                closeLoginModal();
+                            }
+                        });
+                        
+                        // 로그인 폼 제출 이벤트 처리
+                        const loginForm = document.getElementById('loginForm');
+                        if (loginForm) {
+                            loginForm.addEventListener('submit', function(e) {
+                                e.preventDefault();
+                                const userId = document.getElementById('user-id').value;
+                                const password = document.getElementById('user-password').value;
+                                
+                                console.log('로그인 시도:', userId);
+                                
+                                // 간단한 로그인 처리 (실제로는 서버 통신이 필요)
+                                if (userId && password) {
+                                    localStorage.setItem('isLoggedIn', 'true');
+                                    localStorage.setItem('userId', userId);
+                                    closeLoginModal();
+                                    updateLoginStatus();
+                                    
+                                    // 로그인 성공 메시지
+                                    alert('로그인 되었습니다.');
+                                    
+                                    // 페이지 새로고침 (선택사항)
+                                    // location.reload();
+                                } else {
+                                    const errorMsg = document.getElementById('login-error-message');
+                                    if (errorMsg) {
+                                        errorMsg.textContent = '아이디와 비밀번호를 입력해주세요.';
+                                        errorMsg.style.display = 'block';
+                                    }
+                                }
+                            });
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('모달 로딩 오류:', error);
+                    alert('로그인 모달을 불러오는데 실패했습니다.');
+                });
+        }
+        
+        // 로그인 모달 닫기 함수
+        function closeLoginModal() {
+            const loginModalOverlay = document.querySelector('.login-modal-overlay');
+            if (loginModalOverlay) {
+                loginModalOverlay.classList.remove('show');
+                
+                // 애니메이션 완료 후 모달 HTML 제거 (선택 사항)
+                setTimeout(() => {
+                    const modalContainer = document.getElementById('modal-container');
+                    modalContainer.innerHTML = '';
+                }, 300);
+            }
+        }
+        
+        // 로그인 상태 업데이트 함수
+        function updateLoginStatus() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const userId = localStorage.getItem('userId');
+            const loginLink = document.querySelector('.top-menu-right a:first-child');
+            
+            if (isLoggedIn && loginLink) {
+                loginLink.textContent = '로그아웃';
+                loginLink.setAttribute('onclick', 'logout(); return false;');
+                
+                // 로그인 사용자 이름 표시 (옵션)
+                if (userId) {
+                    const userLinks = document.querySelectorAll('.top-menu-right a');
+                    if (userLinks.length > 1) {
+                        userLinks[1].textContent = userId + '님';
+                    }
+                }
+            } else if (loginLink) {
+                loginLink.textContent = '로그인';
+                loginLink.setAttribute('onclick', 'openLoginModal(); return false;');
+            }
+        }
+        
+        // 로그아웃 함수
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userId');
+            alert('로그아웃 되었습니다.');
+            updateLoginStatus();
+            // 현재 페이지 새로고침
+            location.reload();
+        }
+        
+        // 페이지 로드 시 실행
+        document.addEventListener('DOMContentLoaded', function() {
+            // 로그인 상태 업데이트
+            updateLoginStatus();
+            
+            // 기존 초기화 코드
+            // 주문 상태 탭 클릭 이벤트
+            document.querySelectorAll('.status-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.status-tab').forEach(t => {
+                        t.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // 탭에 따른 주문 필터링(지금은 주문이 없으므로 동작하지 않음)
+                    filterOrdersByStatus(this.textContent.trim().split(' ')[0]);
+                });
+            });
+            
+            // 전역 window 함수로 등록
+            window.openLoginModal = openLoginModal;
+            window.closeLoginModal = closeLoginModal;
+        });
+    </script>
+</body>
+</html> 

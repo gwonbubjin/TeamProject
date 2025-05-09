@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>마이페이지 - HittoStore</title>
+  <link rel="icon" href="../images/logo.png" type="image/png">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="mypage.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+</head>
+<body>
+  <!-- 최상단 검정 바 -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-menu-left">
+        <a href="../orderDelivery/orderDelivery.html">주문/배송</a>
+        <a href="../customerService/customerService.html">고객센터</a>
+      </div>
+      <div class="top-menu-right">
+        <a href="#" id="login-link" onclick="openLoginModal(); return false;">로그인</a>
+        <a href="../signup/signup.html">회원가입</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 메인 메뉴 -->
+  <nav class="main-nav">
+    <div class="container">
+      <ul class="nav-menu">
+        <li><a href="#"><i class="fas fa-th-large"></i> 카테고리</a>
+          <ul class="sub-menu">
+            <li><a href="../category/category.html?type=glove">글러브/미트</a></li>
+            <li><a href="../category/category.html?type=bat">배트</a></li>
+            <li><a href="../category/category.html?type=ball">야구공</a></li>
+            <li><a href="../category/category.html?type=clothing">의류/잠바</a></li>
+            <li><a href="../category/category.html?type=shoes">신발/스파이크</a></li>
+            <li><a href="../category/category.html?type=equipment">장비용품</a></li>
+          </ul>
+        </li>
+        <li><a href="../bestproduct/bestproduct.html">베스트상품</a></li>
+        <li><a href="../newproduct/newproduct.html">신상품</a></li>
+        <li><a href="#">이벤트</a></li>
+        <li><a href="#">브랜드샵</a></li>
+        <li><a href="#">할인상품</a></li>
+        <li><a href="#">시즌오프</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 헤더 (로고 및 검색) -->
+  <header class="main-header">
+    <div class="container">
+      <div class="logo">
+        <a href="../index.html">
+          <h1><i class="fas fa-baseball-ball"></i> HittoStore</h1>
+        </a>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="검색어를 입력하세요">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </div>
+      <div class="header-icons">
+        <a href="#" class="icon-link" title="위시리스트"><i class="fas fa-heart"></i></a>
+        <a href="../community/index.html" class="icon-link" title="커뮤니티"><i class="fas fa-users"></i></a>
+        <a href="./mypage.html" class="icon-link active" title="내 계정"><i class="fas fa-user"></i></a>
+        <a href="#" class="icon-link cart" title="장바구니"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 마이페이지 컨텐츠 영역 -->
+  <section class="mypage-content">
+    <div class="container">
+      <!-- 로그인이 필요한 경우 표시할 영역 -->
+      <div class="login-required" id="login-required">
+        <div class="login-message">
+          <i class="fas fa-lock"></i>
+          <h2>로그인이 필요합니다</h2>
+          <p>마이페이지를 이용하기 위해서는 로그인이 필요합니다.</p>
+          <div class="login-buttons">
+            <button class="primary-btn" id="login-btn" onclick="openLoginModal()">로그인</button>
+            <a href="../signup/signup.html" class="secondary-btn">회원가입</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 마이페이지 메인 컨텐츠 (로그인 후 표시) -->
+      <div class="mypage-container" id="mypage-container" style="display: none;">
+        <!-- 사용자 프로필 카드 -->
+        <div class="profile-card">
+          <div class="profile-header">
+            <div class="profile-image">
+              <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="profile-info">
+              <h2 class="profile-name" id="profile-name">사용자님</h2>
+              <p class="profile-grade">일반회원</p>
+              <button class="edit-profile-btn"><i class="fas fa-cog"></i> 정보수정</button>
+            </div>
+          </div>
+          <div class="profile-benefits">
+            <div class="benefit-item">
+              <i class="fas fa-coins"></i>
+              <div class="benefit-content">
+                <p class="benefit-label">적립금</p>
+                <p class="benefit-value">5,000원</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-ticket-alt"></i>
+              <div class="benefit-content">
+                <p class="benefit-label">쿠폰</p>
+                <p class="benefit-value">3장</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-shopping-bag"></i>
+              <div class="benefit-content">
+                <p class="benefit-label">주문</p>
+                <p class="benefit-value">2건</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 주문 현황 요약 -->
+        <div class="order-summary">
+          <h3 class="section-title">나의 주문 현황</h3>
+          <div class="order-status-list">
+            <div class="status-item">
+              <i class="fas fa-credit-card"></i>
+              <p class="status-label">결제완료</p>
+              <p class="status-count">1</p>
+            </div>
+            <div class="status-item">
+              <i class="fas fa-box"></i>
+              <p class="status-label">배송준비중</p>
+              <p class="status-count">0</p>
+            </div>
+            <div class="status-item">
+              <i class="fas fa-truck"></i>
+              <p class="status-label">배송중</p>
+              <p class="status-count">1</p>
+            </div>
+            <div class="status-item">
+              <i class="fas fa-house-chimney"></i>
+              <p class="status-label">배송완료</p>
+              <p class="status-count">0</p>
+            </div>
+            <div class="status-item">
+              <i class="fas fa-undo"></i>
+              <p class="status-label">취소/반품</p>
+              <p class="status-count">0</p>
+            </div>
+          </div>
+          <a href="../orderDelivery/orderDelivery.html" class="view-all-btn">모든 주문 보기 <i class="fas fa-chevron-right"></i></a>
+        </div>
+
+        <!-- 최근 주문 내역 -->
+        <div class="recent-orders">
+          <h3 class="section-title">최근 주문 내역</h3>
+          <div class="order-list">
+            <div class="order-item">
+              <div class="order-header">
+                <div class="order-date">2023.05.08</div>
+                <div class="order-number">주문번호: 2023050810395</div>
+                <div class="order-status status-shipping">배송중</div>
+              </div>
+              <div class="order-details">
+                <div class="product-image">
+                  <img src="../images/glove1.jpg" alt="야구 글러브">
+                </div>
+                <div class="product-info">
+                  <div class="product-name">모리모토 커브 스타일 내야 야구 글러브 11.75인치</div>
+                  <div class="product-option">옵션: 블랙/레드</div>
+                  <div class="product-price">99,000원 / 1개</div>
+                </div>
+              </div>
+              <div class="order-actions">
+                <div class="order-total">총 결제금액: <span>99,000원</span></div>
+                <div class="action-buttons">
+                  <button class="action-btn">주문취소</button>
+                  <button class="action-btn">배송조회</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="order-item">
+              <div class="order-header">
+                <div class="order-date">2023.04.29</div>
+                <div class="order-number">주문번호: 2023042905843</div>
+                <div class="order-status status-payment">결제완료</div>
+              </div>
+              <div class="order-details">
+                <div class="product-image">
+                  <img src="../images/bat1.jpg" alt="야구 배트">
+                </div>
+                <div class="product-info">
+                  <div class="product-name">이스턴 고스트 X 알루미늄 배트 33/30</div>
+                  <div class="product-option">-</div>
+                  <div class="product-price">260,000원 / 1개</div>
+                </div>
+              </div>
+              <div class="order-actions">
+                <div class="order-total">총 결제금액: <span>260,000원</span></div>
+                <div class="action-buttons">
+                  <button class="action-btn">주문취소</button>
+                  <button class="action-btn">배송조회</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 마이페이지 메뉴 섹션 -->
+        <div class="mypage-menu">
+          <div class="menu-group">
+            <h3 class="group-title">쇼핑 정보</h3>
+            <ul class="menu-list">
+              <li class="menu-item">
+                <a href="#">
+                  <i class="fas fa-shopping-basket"></i>
+                  <span>주문 내역</span>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="#">
+                  <i class="fas fa-truck"></i>
+                  <span>배송 조회</span>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="#">
+                  <i class="fas fa-undo-alt"></i>
+                  <span>취소/반품/교환</span>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="#">
+                  <i class="fas fa-heart"></i>
+                  <span>관심 상품</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="menu-group">
+            <h3 class="group-title">혜택 관리</h3>
+            <ul class="menu-list">
+              <li class="menu-item">
+                <a href="#">
+                  <i class="fas fa-coins"></i>
+                  <span>적립금</span>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="#">
+                  <i class="fas fa-ticket-alt"></i>
+                  <span>쿠폰</span>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="#">
+                  <i class="fas fa-trophy"></i>
+                  <span>회원 등급</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="menu-group">
+            <h3 class="group-title">활동 내역</h3>
+            <ul class="menu-list">
+              <li class="menu-item">
+                <a href="#">
+                  <i class="fas fa-star"></i>
+                  <span>리뷰 관리</span>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="#">
+                  <i class="fas fa-question-circle"></i>
+                  <span>문의 내역</span>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="#">
+                  <i class="fas fa-eye"></i>
+                  <span>최근 본 상품</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="menu-group">
+            <h3 class="group-title">회원 정보</h3>
+            <ul class="menu-list">
+              <li class="menu-item">
+                <a href="#">
+                  <i class="fas fa-user-edit"></i>
+                  <span>회원 정보 수정</span>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="#">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>배송지 관리</span>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="#">
+                  <i class="fas fa-lock"></i>
+                  <span>비밀번호 변경</span>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="#" onclick="logout(); return false;">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <span>로그아웃</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 최근 본 상품 -->
+        <div class="recent-products">
+          <h3 class="section-title">최근 본 상품</h3>
+          <div class="product-slider">
+            <div class="product-grid">
+              <div class="product-item">
+                <div class="product-thumb">
+                  <img src="../images/glove1.jpg" alt="모리모토 커브 스타일 내야 야구 글러브">
+                  <div class="product-badges">
+                    <span class="badge discount">41%</span>
+                    <span class="badge hot">HOT</span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title">모리모토 커브 스타일 내야 야구 글러브 11.75인치</h3>
+                  <div class="product-price">
+                    <span class="price-sale">99,000원</span>
+                    <span class="price-normal">169,000원</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="product-item">
+                <div class="product-thumb">
+                  <img src="../images/bat1.jpg" alt="이스턴 고스트 X 알루미늄 배트">
+                  <div class="product-badges">
+                    <span class="badge hot">인기</span>
+                    <span class="badge discount">35%</span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title">이스턴 고스트 X 알루미늄 배트 33/30</h3>
+                  <div class="product-price">
+                    <span class="price-sale">260,000원</span>
+                    <span class="price-normal">400,000원</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="product-item">
+                <div class="product-thumb">
+                  <img src="../images/shoes1.jpg" alt="프로 스파이크 신발">
+                  <div class="product-badges">
+                    <span class="badge hot">BEST</span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title">프로 스파이크 신발</h3>
+                  <div class="product-price">
+                    <span class="price-sale">175,000원</span>
+                    <span class="price-normal">210,000원</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 개인화된 추천 상품 -->
+        <div class="recommended-products">
+          <h3 class="section-title">회원님을 위한 추천 상품</h3>
+          <div class="product-grid">
+            <div class="product-item">
+              <div class="product-thumb">
+                <img src="../images/ball1.jpg" alt="공인구 12개 세트">
+                <div class="product-badges">
+                  <span class="badge new">NEW</span>
+                </div>
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">공인구 12개 세트</h3>
+                <div class="product-price">
+                  <span class="price-sale">48,000원</span>
+                  <span class="price-normal">60,000원</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-item">
+              <div class="product-thumb">
+                <img src="../images/equipment2.jpg" alt="배팅 헬멧 양귀 프리미엄">
+                <div class="product-badges">
+                  <span class="badge hot">HOT</span>
+                </div>
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">배팅 헬멧 양귀 프리미엄</h3>
+                <div class="product-price">
+                  <span class="price-sale">98,000원</span>
+                  <span class="price-normal">135,000원</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-item">
+              <div class="product-thumb">
+                <img src="../images/clothing3.jpg" alt="프리미엄 야구 잠바">
+                <div class="product-badges">
+                  <span class="badge hot">BEST</span>
+                </div>
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">프리미엄 야구 잠바</h3>
+                <div class="product-price">
+                  <span class="price-sale">159,000원</span>
+                  <span class="price-normal">210,000원</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-item">
+              <div class="product-thumb">
+                <img src="../images/equipment3.jpg" alt="포수 프로텍터 세트">
+                <div class="product-badges">
+                  <span class="badge discount">20%</span>
+                </div>
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">포수 프로텍터 세트</h3>
+                <div class="product-price">
+                  <span class="price-sale">220,000원</span>
+                  <span class="price-normal">280,000원</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 푸터 -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-info-boxes">
+        <div class="info-box">
+          <div class="info-title">
+            <i class="fas fa-headset"></i>
+            <h4>고객센터</h4>
+          </div>
+          <p class="info-main">010-6410-0391</p>
+          <p class="info-sub">Fax. xxx-xxx-xxxx</p>
+          <button class="info-button">1:1문의 <i class="fas fa-chevron-right"></i></button>
+          <p class="info-time">월-금 오후 PM 01:00 - PM 05:00 / 주말 및 공휴일 휴무</p>
+        </div>
+        
+        <div class="info-box">
+          <div class="info-title">
+            <i class="fas fa-wallet"></i>
+            <h4>계좌안내</h4>
+          </div>
+          <p class="info-main">카카오뱅크 3333184917999</p>
+          <p class="info-sub">예금주: 권법진</p>
+          <p class="info-notice">많이많이 입금해주세요</p>
+        </div>
+      </div>
+      
+      <div class="footer-top">
+        <div class="footer-logo">
+          <h2><i class="fas fa-baseball-ball"></i> HittoStore</h2>
+        </div>
+        <div class="footer-links">
+          <ul>
+            <li><a href="#">회사소개</a></li>
+            <li><a href="#">이용약관</a></li>
+            <li><a href="#"><strong>개인정보처리방침</strong></a></li>
+            <li><a href="#">제휴문의</a></li>
+            <li><a href="#">고객센터</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-main">
+        <div class="company-info">
+          <p>상호명: (주)히토스토어 | 대표: 권법진 | 사업자등록번호: 123-45-67890</p>
+          <p>주소: 부산광역시 부산진구 양지로 54 | 통신판매업신고: 제2025-부산양산-1234호</p>
+          <p>고객센터: 010-6410-0391 (평일 10:00~18:00, 점심시간 12:00~13:00, 주말/공휴일 휴무)</p>
+          <p class="email">이메일: gwonbubjin@gmail.com</p>
+        </div>
+        <div class="customer-center">
+          <h3>고객센터</h3>
+          <p class="phone">02-123-4567</p>
+          <p class="time">평일 10:00~18:00</p>
+          <p class="time">점심시간 12:00~13:00</p>
+          <p class="time">주말/공휴일 휴무</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 HittoStore All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 모달 컨테이너 -->
+  <div id="modal-container"></div>
+
+  <!-- 자바스크립트 파일 -->
+  <script src="../js/main.js"></script>
+  <script src="mypage.js"></script>
+</body>
+</html> 
